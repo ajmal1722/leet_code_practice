@@ -246,12 +246,14 @@ var map = function(arr, fn) {
 // onceFn(2, 3, 6); // undefined, fn was not called
 // onceFn(4, 6, 8); // undefined, fn was not called
 var once = function(fn) {
-    let call = 0
+    let called = false;
     return function(...args){
-            call++
-        if (call === 1) {
+        if (!called) {
+            called = true;
             return fn(...args)
-        } 
+        } else {
+            return undefined
+        }
     }
 };
 fn = (a,b,c) => (a + b + c), calls = [[1,2,3],[2,3,6],[3,4,5]]
